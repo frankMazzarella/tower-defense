@@ -20,7 +20,17 @@ public class WaveSpawner : MonoBehaviour
             waveCountdown = timeBetweenWaves;
         }
         waveCountdown -= Time.deltaTime;
-        waveCountdownLabel.text = "Next Wave: " + Mathf.Floor(waveCountdown + 1).ToString();
+        UpdateCountdownLabel();
+    }
+
+    private void UpdateCountdownLabel()
+    {
+        int nextWaveSeconds = Mathf.CeilToInt(waveCountdown);
+        if (nextWaveSeconds == 0)
+        {
+            nextWaveSeconds = 1;
+        }
+        waveCountdownLabel.text = "Next Wave: " + nextWaveSeconds.ToString();
     }
 
     private IEnumerator SpawnWave()
